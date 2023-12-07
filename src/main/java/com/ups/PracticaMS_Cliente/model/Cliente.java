@@ -1,9 +1,14 @@
 package com.ups.PracticaMS_Cliente.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+@Entity
+@Table(name="Cliente")
 public class Cliente {
 
+    @Id
     public String cedula;
-
     public String nombre;
     public String apellido;
     public String correo;
