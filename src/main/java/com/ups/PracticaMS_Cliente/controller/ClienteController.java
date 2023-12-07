@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ClienteController {
 
-   @Autowired
+   @Autowired // es similar al inject
    public ClienteService clienteService;
 
    // Para consumir el Guardar Clientes desde Postman o FronEnd
