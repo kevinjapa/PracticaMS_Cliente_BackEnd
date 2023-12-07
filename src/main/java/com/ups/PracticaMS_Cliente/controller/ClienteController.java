@@ -19,6 +19,7 @@ public class ClienteController {
    public ClienteService clienteService;
 
    // Para consumir el Guardar Clientes desde Postman o FronEnd
+   @PostMapping("/guardar")
    public ResponseEntity<Cliente> save(@RequestBody Cliente cliente){
        Cliente t= clienteService.create(cliente);
 
