@@ -12,14 +12,14 @@ import java.util.List;
 public class ClienteService {
 
     @Autowired
-    private ClienteRepository estudianteRepository;
+    private ClienteRepository clienteRepository;
     // Guardar mis Clientes
     public Cliente create(Cliente cliente){
-        return estudianteRepository.save(cliente);
+        return clienteRepository.save(cliente);
     }
 
     // Listar mis Clientes
     public List<Cliente> listClientes(){
-        return estudianteRepository.findAll();
+        return clienteRepository.findAll();
     }
 }
