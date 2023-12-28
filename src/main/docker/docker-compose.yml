@@ -1,0 +1,43 @@
+version: '3.6'
+services:
+  postgresdocker:
+    image: postgres:latest
+    container_name: postgresdocker
+    hostname: postgresdocker
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: microdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      TZ: America/Guayaquil
+    networks:
+      - datalogger_net
+    volumes:
+      - pg_data2:/var/lib/postgresql/data
+  srvwildfly:
+    image: ups/demoappdocker
+    container_name: srvwildfly
+    hostname: srvwildfly
+    environment:
+      TZ: America/Guayaquil
+    ports:
+      - 8090:8090
+      - 9090:9090
+    command: /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -c standalone.xml -bmanagement 0.0.0.0 --debug *:8787
+    depends_on:
+      - srvdb
+    networks:
+      - datalogger_net
+
+
+  angular-app:
+    image: node:latest
+    working_dir: /app
+    volumes:
+      - ./ruta_de_tu_proyecto_angular:/app
+    command: "npm start"  # Ajusta este comando según la configuración de tu proyecto Angular
+    ports:
+      - "4200:4200"  # Ajusta el puerto según la configuración de tu proyecto Angular
+    depends_on:
+      - microservicio
