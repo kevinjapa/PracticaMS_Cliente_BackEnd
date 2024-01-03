@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  wildfly:
+    image: jboss/wildfly
+    environment:
+      - WILDFLY_USER=user
+      - WILDFLY_PASS=userPassword
+    ports:
+      - "8989:8080"  # Puerto de WildFly
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5430:5432"  # Puerto predeterminado de PostgreSQL
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4  # Imagen oficial de PGAdmin
+    ports:
+      - "9090:80"  # Puerto para acceder a PGAdmin desde fuera del contenedor
+    environment:
+      PGADMIN_DEFAULT_EMAIL: japakevin@gmail.com  # Cambia con tu correo electrónico
+      PGADMIN_DEFAULT_PASSWORD: adminPassword  # Cambia con tu contraseña
+    depends_on:
+      - postgres  # Asegura que PGAdmin espere a que PostgreSQL esté listo
+
+volumes:
+  postgres-data:

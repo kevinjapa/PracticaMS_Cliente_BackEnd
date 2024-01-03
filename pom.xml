@@ -56,6 +56,8 @@
 					<mainClass>com.ups.PracticaMS_Cliente.PracticaMsClienteApplication</mainClass>
 				</configuration>
 			</plugin>
+
+			
 		</plugins>
 	</build>
 
